@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-  <form action="/member/login" method="post">
+  <form action="/member/signup" method="post">
     <div>
       <input type="text" name="userID">
     </div>
@@ -13,11 +13,14 @@
       <input type="text" name="userPW">
     </div>
     <div>
-    <label>
-      <input type="checkbox" name="remember-me" /> Remember Me
-    </label>
+      <input type="text" name="userEmail">
     </div>
-    <div><button>LOGIN</button></div>
+    <div>
+      <input type="text" name="userName">
+    </div>
+    <div>
+      <button>SIGN UP</button>
+    </div>
   </form>
 </body>
 </html>

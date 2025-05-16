@@ -44,6 +44,11 @@ public class SecurityConfig {
                                     .deleteCookies("JSESSIONID")
                                     .permitAll()
                 )
+                .rememberMe(rememberMe -> rememberMe
+                        .key("JSESSIONID")
+                        .tokenValiditySeconds(3600)
+                        .rememberMeCookieName("rememberMe")
+                )
                 .csrf((csrf)->csrf.disable());
         return httpSecurity.build();
     }
