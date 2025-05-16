@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -22,4 +24,9 @@ public class MemberService {
         Member savedMember = memberDto.toMember();
         return memberDao.save(savedMember);
     }
+    public List<Member> findAll() {
+        return memberDao.findAll();
+
+    }
+
 }

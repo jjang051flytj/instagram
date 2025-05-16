@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>member list</title>
 </head>
 <body>
   <h1>멤버리스트</h1>
+    <table border="1">
+        <th:block th:each="member : ${memberList}">
+        <tr>
+            <td th:text="${memberStat.count}">userId</td>
+            <td th:text="${member.userID}">userId</td>
+            <td th:text="${member.userName}">userId</td>
+            <td th:text="${member.userEmail}">userId</td>
+            <td><button>탈퇴</button></td>
+        </tr>
+        </th:block>
+    </table>
 </body>
 </html>

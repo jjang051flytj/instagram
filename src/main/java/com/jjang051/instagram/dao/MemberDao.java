@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -19,8 +20,12 @@ public class MemberDao {
     }
 
     public Optional<Member> findByUserID(String userID) {
-        log.info("dao===userID==={}",userID);
+        log.info("userID==={}",userID);
         Optional<Member> optionalMember =  memberRepository.findByUserID(userID);
         return optionalMember;
+    }
+
+    public List<Member> findAll() {
+        return memberRepository.findAll();
     }
 }
