@@ -28,4 +28,8 @@ public class MemberDao {
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
+
+    public int deleteByUserID(String userID) {
+        return memberRepository.deleteByUserID(userID);
+    }
 }

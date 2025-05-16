@@ -13,9 +13,27 @@
             <td th:text="${member.userID}">userId</td>
             <td th:text="${member.userName}">userId</td>
             <td th:text="${member.userEmail}">userId</td>
-            <td><button>탈퇴</button></td>
+            <td><button th:attr="data-userID=${member.userID}" class="btn-delete">탈퇴</button></td>
         </tr>
         </th:block>
     </table>
+    <script>
+        document.querySelectorAll(".btn-delete").forEach(btn=>{
+            btn.addEventListener("click",(e)=>{
+                const userID = btn.dataset.userid;
+                console.log("userID==="+userID);
+                fetch(`/admin/member/delete/${userID}`,{
+                    method:"delete"
+                })
+                    .then(response=>response.json())
+                    .then(json=>{
+                        console.log(json);
+                        if(json.isDelete) {
+                            btn.closest("tr").remove();
+                        }
+                    })
+            })
+        })
+    </script>
 </body>
 </html>
