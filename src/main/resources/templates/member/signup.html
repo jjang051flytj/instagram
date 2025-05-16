@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-  <form action="/member/signup" method="post">
+  <form action="/member/signup" method="post" th:object="${memberDto}">
     <div>
-      <input type="text" name="userID">
+      <input type="text" name="userID" th:field="*{userID}">
+      <div th:errors="*{userID}"></div>
+    </div>
+
+    <div>
+      <input type="text" name="userPW" th:field="*{userPW}">
+      <div th:errors="*{userPW}"></div>
     </div>
     <div>
-      <input type="text" name="userPW">
+      <input type="text" name="userEmail" th:field="*{userEmail}">
+      <div th:errors="*{userEmail}"></div>
     </div>
     <div>
-      <input type="text" name="userEmail">
-    </div>
-    <div>
-      <input type="text" name="userName">
+      <input type="text" name="userName" th:field="*{userName}">
+      <div th:errors="*{userName}"></div>
     </div>
     <div>
       <button>SIGN UP</button>

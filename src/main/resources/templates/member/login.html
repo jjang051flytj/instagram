@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+  <div th:if="${param.error}">    아이디 패스워드 확인해 주세요.  </div>
   <form action="/member/login" method="post">
     <div>
       <input type="text" name="userID">
     </div>
     <div>
-      <input type="text" name="userPW">
+      <input type="password" name="userPW">
     </div>
     <div>
     <label>

@@ -1,5 +1,6 @@
 package com.jjang051.instagram.entity;
 
+import com.jjang051.instagram.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,14 +16,19 @@ public class Member extends BaseEntity {
     private int id;
 
     @Column(unique = true, nullable = false)  //unique not null
-    private int userID;
+    private String userID;
 
     @Column(nullable = false)
-    private int userPW;
+    private String userPW;
 
-    private int userName;
+    private String userName;
 
     @Column(unique = true, nullable = false)
-    private int userEmail;
+    private String userEmail;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
 }

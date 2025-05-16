@@ -1,13 +1,17 @@
 package com.jjang051.instagram.config;
 
+import com.jjang051.instagram.service.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     //스프링 컨테이너에 등록되고 di할 수 있다..
     @Bean
@@ -32,7 +36,7 @@ public class SecurityConfig {
                                 .usernameParameter("userID")
                                 .passwordParameter("userPW")
                                 .loginProcessingUrl("/member/login")
-                                .defaultSuccessUrl("/index/index")
+                                .defaultSuccessUrl("/index/index",true)
                                 .failureUrl("/member/login?error") //redirect로 넘어간다.
                                 .permitAll()
                 )
@@ -43,11 +47,6 @@ public class SecurityConfig {
                                     .invalidateHttpSession(true)
                                     .deleteCookies("JSESSIONID")
                                     .permitAll()
-                )
-                .rememberMe(rememberMe -> rememberMe
-                        .key("JSESSIONID")
-                        .tokenValiditySeconds(3600)
-                        .rememberMeCookieName("rememberMe")
                 )
                 .csrf((csrf)->csrf.disable());
         return httpSecurity.build();
