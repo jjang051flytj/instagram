@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Table(name="instgram_member")
-
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,4 +24,5 @@ public class Member extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private int userEmail;
+
 }
