@@ -4,6 +4,7 @@ import com.jjang051.instagram.constant.Role;
 import com.jjang051.instagram.dao.MemberDao;
 import com.jjang051.instagram.dto.MemberDto;
 import com.jjang051.instagram.entity.Member;
+import com.jjang051.instagram.mapper.MemberMapper;
 import com.jjang051.instagram.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,11 +20,14 @@ public class MemberService {
     //repository 를 직접 써도 된다.....
     private final MemberDao memberDao;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MemberMapper memberMapper; // MapStruct Mapper 주입
+
     public Member save(MemberDto memberDto) {
         String encodedPassword =  bCryptPasswordEncoder.encode(memberDto.getUserPW());
         memberDto.setUserPW(encodedPassword);
         memberDto.setRole(Role.ROLE_USER);
-        Member savedMember = memberDto.toMember();
+        //Member savedMember = memberDto.toMember();
+        Member savedMember = memberMapper.toEntity(memberDto);
         return memberDao.save(savedMember);
     }
     public List<MemberDto> findAll() {
