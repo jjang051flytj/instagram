@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -28,7 +29,7 @@ public class StorySevice {
 
 
 
-    public void write(StoryUploadDto storyDto) {
+    public Story write(StoryUploadDto storyDto) {
         //dto받아서 upload폴더에 이미지 업로드 하고
         // dao에 save()
         //이름을 바꿔서
@@ -44,7 +45,16 @@ public class StorySevice {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //storyDao.save(saveStory);
+        storyDto.setImgUrl(renameFileName);
+        Story story = StoryUploadDto.toStory(storyDto);
+        //Story story = storyDto.toStory();
+
+        return storyDao.save(story);
+    }
+
+    public List<StoryUploadDto> findAll() {
+
+        return storyDao.findAll();
     }
     //db에 입출력
 }

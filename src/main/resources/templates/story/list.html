@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <ul>
+    <th:block th:each="item:${storyUploadDtoList}">
+    <li>
+      <a href="">
+        <div class="img-box">
+          <img src="" th:src="@{|/upload/${item.imgUrl}|}">
+        </div>
+        <div class="txt-box">
+          <h2 th:text="${item.caption}">제목</h2>
+<!--          <p th:text="${item.content}">-->
+<!--            간추린 내용-->
+<!--          </p>-->
+        </div>
+      </a>
+    </li>
+    </th:block>
+  </ul>
+</body>
+</html>

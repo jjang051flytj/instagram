@@ -20,4 +20,6 @@ public class Story extends BaseEntity {
     private Integer id;
     private String caption;
     private String imgUrl;
+    private String content;
+
 }
