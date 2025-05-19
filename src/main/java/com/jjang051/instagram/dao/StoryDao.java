@@ -22,6 +22,7 @@ public class StoryDao {
         List<Story> storyList = storyRepository.findAll();
         List<StoryUploadDto> storyDtoList = storyList.stream().map(
                 story -> StoryUploadDto.builder()
+                        .id(story.getId())
                         .caption(story.getCaption())
                         .content(story.getContent())
                         .imgUrl(story.getImgUrl())

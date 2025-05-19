@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <style>
+    .story-list {
+      width:1200px;
+      margin: 100px auto;
+      display: flex;
+    }
+    .story-list li {
+      width:24%;
+      margin: 0.5%;
+    }
+    .story-list li img {
+      width:100%;
+    }
+  </style>
 </head>
 <body>
-  <ul>
+  <ul class="story-list">
     <th:block th:each="item:${storyUploadDtoList}">
     <li>
-      <a href="">
+      <!--<a href="" th:href="@{/story/{id}(id=${item.id})}">-->
+      <a href="" th:href="@{|/story/${item.id}|}">
+
         <div class="img-box">
           <img src="" th:src="@{|/upload/${item.imgUrl}|}">
         </div>

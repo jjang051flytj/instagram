@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class StoryUploadDto {
+    private int id;
     private MultipartFile file;
     private String caption;
     private String imgUrl;
