@@ -13,6 +13,8 @@
             <td th:text="${member.userID}">userId</td>
             <td th:text="${member.userName}">userId</td>
             <td th:text="${member.userEmail}">userId</td>
+            <td th:text="${#temporals.format(member.regDate,'yyyy-MM-dd HH:mm:ss')}">userId</td>
+            <td th:text="${#temporals.format(member.modifyDate,'yyyy-MM-dd HH:mm:ss')}">userId</td>
             <td><button th:attr="data-userID=${member.userID}" class="btn-delete">탈퇴</button></td>
         </tr>
         </th:block>

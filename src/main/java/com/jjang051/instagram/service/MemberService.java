@@ -39,6 +39,8 @@ public class MemberService {
                                 .userID(member.getUserID())
                                 .userName(member.getUserName())
                                 .userEmail(member.getUserEmail())
+                                .regDate(member.getRegDate())
+                                .modifyDate(member.getModifyDate())
                                 .role(member.getRole())
                         .build()
                 ).toList();

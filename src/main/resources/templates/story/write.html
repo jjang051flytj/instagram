@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" action="/story/write" enctype="multipart/form-data">
+        <div><input type="file" name="file" id="file"></div>
+        <div class="preview-box">
+            <img src=""  id="preview">
+        </div>
+        <div>
+            <input type="text" name="caption">
+        </div>
+        <div>
+            <button>UPLOAD</button>
+        </div>
+    </form>
+<script>
+    const file = document.querySelector("#file");
+    const preview = document.querySelector("#preview");
+    file.addEventListener("change",(e)=>{
+        const selectedFile =  e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.onload=(e)=>{
+            preview.setAttribute("src",e.target.result);
+        }
+        fileReader.readAsDataURL(selectedFile);
+    })
+</script>
+</body>
+</html>

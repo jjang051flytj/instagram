@@ -10,6 +10,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -33,6 +35,9 @@ public class MemberDto {
     @Enumerated(EnumType.STRING)
     private Role role; //Role 상수 처리할 예정 enum
 
+    private LocalDateTime regDate;
+    private LocalDateTime modifyDate;
+
     public Member toMember() {
         return Member.builder()
                 .userID(this.userID)
@@ -42,4 +47,5 @@ public class MemberDto {
                 .role(this.role)
                 .build();
     }
+
 }
