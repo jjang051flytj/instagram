@@ -31,6 +31,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
     //implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
@@ -49,4 +53,20 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
+
+
+sourceSets.main.java.srcDir querydslDir
+
+
+tasks.withType(JavaCompile).configureEach {
+    if (project.gradle.gradleVersion.startsWith("8")) {
+        options.generatedSourceOutputDirectory = querydslDir
+    } else {
+        options.annotationProcessorGeneratedSourcesDirectory = querydslDir
+    }
+}
+clean {
+    delete file(querydslDir)
 }

@@ -22,4 +22,7 @@ public class Story extends BaseEntity {
     private String imgUrl;
     private String content;
 
+
+
+
 }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 //db관련된 annotation
 @Repository
@@ -31,5 +32,23 @@ public class StoryDao {
                         .build()
         ).toList();
         return storyDtoList;
+    }
+
+    public StoryUploadDto findById(int id) {
+        Optional<Story> findedStory = storyRepository.findById(id);
+        if(findedStory.isPresent()) {
+            //dto로변환해서 리턴해준다.Story story = findedStory.get();
+            Story story = findedStory.get();
+
+            return StoryUploadDto.builder()
+                                .id(story.getId())
+                                .caption(story.getCaption())
+                                .content(story.getContent())
+                                .imgUrl(story.getImgUrl())
+                                .regDate(story.getRegDate())
+                                .modifyDate(story.getModifyDate())
+                            .build();
+        }
+        throw new IllegalArgumentException("찾을 수 없는 스토리입니다.");
     }
 }

@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -40,5 +40,23 @@ public class StoryController {
        List<StoryUploadDto> storyUploadDtoList = storySevice.findAll();
        model.addAttribute("storyUploadDtoList", storyUploadDtoList);
        return "story/list";
+    }
+
+    @GetMapping("/{id}")
+    public String detail(@PathVariable int id, Model model) {
+        StoryUploadDto detail = storySevice.findById(id);
+        model.addAttribute("detail", detail);
+        return "story/detail";
+    }
+    @PostMapping("/ck-upload")
+    @ResponseBody
+    public Map<String, String> ckUpload(@RequestParam MultipartFile upload) {
+        //<input type="file" name="upload">
+        //MultipartFile serverUpload = upload;
+        log.info("upload: {}", upload.getOriginalFilename());
+        String uploadedFile = storySevice.uploadImg(upload);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("url", "/upload/"+uploadedFile);
+        return resultMap;
     }
 }
