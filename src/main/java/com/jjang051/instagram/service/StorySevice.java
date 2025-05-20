@@ -4,6 +4,7 @@ import com.jjang051.instagram.dao.StoryDao;
 import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
+import com.jjang051.instagram.repository.StoryRepository;
 import com.jjang051.instagram.utils.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class StorySevice {
 
+    private final StoryRepository storyRepository;
     //application.yml에 있는 값 들고 오기....
     @Value("${file.path}")
     String upload;
@@ -31,7 +33,7 @@ public class StorySevice {
 
 
 
-    public Story write(StoryUploadDto storyDto) {
+    public Story write(StoryDto storyDto) {
         String originalFileName =  storyDto.getFile().getOriginalFilename();  //만약에 대표이미지 첨부하지 않아도 되게끔
         //첨부파일이 있으면 업로드 해라.
         if(originalFileName!=null&&!originalFileName.isEmpty()){
@@ -59,13 +61,13 @@ public class StorySevice {
 
             }
         }
-        Story story = StoryUploadDto.toStory(storyDto);
+        Story story = StoryDto.toStory(storyDto);
         //Story story = storyDto.toStory();
 
         return storyDao.save(story);
     }
 
-    public List<StoryUploadDto> findAll() {
+    public List<StoryDto> findAll() {
         return storyDao.findAll();
     }
     public StoryDto findByDtoId(int id) {
@@ -89,5 +91,7 @@ public class StorySevice {
         }
         return renameFileName;
     }
+
+
     //db에 입출력
 }

@@ -29,7 +29,7 @@ public class StoryController {
     }
 
     @PostMapping("/write")
-    public String write(@ModelAttribute StoryUploadDto storyDto) {
+    public String write(@ModelAttribute StoryDto storyDto) {
         log.info("storyDto: {}", storyDto);
         //service == business logic
         Story story = storySevice.write(storyDto);
@@ -38,7 +38,7 @@ public class StoryController {
 
     @GetMapping("/list")
     public String list(Model model) {
-       List<StoryUploadDto> storyUploadDtoList = storySevice.findAll();
+       List<StoryDto> storyUploadDtoList = storySevice.findAll();
        model.addAttribute("storyUploadDtoList", storyUploadDtoList);
        return "story/list";
     }
@@ -46,7 +46,9 @@ public class StoryController {
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
         StoryDto detail = storySevice.findByDtoId(id);
+        List<StoryDto> storyList = storySevice.findAll();
         model.addAttribute("detail", detail);
+        model.addAttribute("storyList", storyList);
         return "story/detail";
     }
     @PostMapping("/ck-upload")

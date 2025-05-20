@@ -22,10 +22,10 @@ public class StoryDao {
         return storyRepository.save(saveStory); //
     }
 
-    public List<StoryUploadDto> findAll() {
+    public List<StoryDto> findAll() {
         List<Story> storyList = storyRepository.findAll();
-        List<StoryUploadDto> storyDtoList = storyList.stream().map(
-                story -> StoryUploadDto.builder()
+        List<StoryDto> storyDtoList = storyList.stream().map(
+                story -> StoryDto.builder()
                         .id(story.getId())
                         .caption(story.getCaption())
                         .content(story.getContent())
@@ -51,7 +51,7 @@ public class StoryDao {
                                             .content(comment.getContent())
                                             .author(comment.getAuthor().getUserName())
                                             .regDate(comment.getRegDate())
-.strRegDate(TimeUtil.getRelativeTime(story.getRegDate()))
+                                            .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))
                                             .build()
                                     ).toList();
             return StoryDto.builder()
@@ -61,7 +61,6 @@ public class StoryDao {
                                 .imgUrl(story.getImgUrl())
                                 .commentList(commentDtoList)
                                 .regDate(story.getRegDate())
-.strRegDate(TimeUtil.getRelativeTime(story.getRegDate()))
                                 .modifyDate(story.getModifyDate())
                             .build();
         }

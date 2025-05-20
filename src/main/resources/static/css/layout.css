@@ -23,11 +23,42 @@ button {
   background: none;
 }
 
+.wrap {
+  display: flex;
+  width: 1200px;
+  margin: 100px auto;
+}
+
+.story-thumb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.story-thumb-list li {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.story-thumb-list li .img-box {
+  height: 100px;
+}
+.story-thumb-list li .img-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.story-thumb-list li .txt-box h2 {
+  font-size: 16px;
+}
+
 .story-list {
   display: flex;
   flex-wrap: wrap;
-  width: 1200px;
-  margin: 100px auto;
+  width: 900px;
   gap: 10px;
 }
 .story-list li {

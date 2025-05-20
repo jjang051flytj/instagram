@@ -6,8 +6,22 @@
     <link rel="stylesheet" href="../css/layout.css" />
   </head>
   <body>
-    <div>
+    <div class="wrap">
+      <div class="story-thumb-list">
+        <th:block th:each="story : ${storyList}">
+          <li class="mb-3">
+            <a th:href="@{/story/detail/{id}(id=${story.id})}">
+              <div class="thumbnail">
+                <img src="" th:src="@{|/upload/${story.imgUrl}|}">
+              </div>
+              <strong th:text="${story.caption}">제목</strong>
+            </a>
+            <p class="text-muted" th:text="${story.strRegDate}">작성일</p>
+          </li>
+        </th:block>
+      </div>
       <div class="detail">
+
         <h2 th:text="${detail.caption}"></h2>
         <div th:utext="${detail.content}" id="detail"></div>
         <div class="comment-list-box">
