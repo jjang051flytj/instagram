@@ -24,12 +24,13 @@ public class CommentService {
 
     @Transactional
     public Comment save(CommentDto commentDto) {
+        /*
         StoryUploadDto storyUploadDto =
                 storyDao.findByDtoId(commentDto.getStoryID());
         Story story =  storyUploadDto.toStory(); //dto를 entity로 바꿔서 저장
         //commentDto를 comment로 바꿔서
         storyDao.save(story); //toStory()에 id가 없음 //영속화가 진행된다.
-
+        */
         //save를 하지않고 처리
         Story story02 =  storyDao.findById(commentDto.getStoryID()); //같은 entity를 보장받고 있음
 

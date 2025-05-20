@@ -1,5 +1,7 @@
 package com.jjang051.instagram.dao;
 
+import com.jjang051.instagram.dto.CommentDto;
+import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
 import com.jjang051.instagram.repository.StoryRepository;
@@ -34,17 +36,27 @@ public class StoryDao {
         return storyDtoList;
     }
 
-    public StoryUploadDto findByDtoId(int id) {
+    public StoryDto findByDtoId(int id) {
         Optional<Story> findedStory = storyRepository.findById(id);
         if(findedStory.isPresent()) {
             //dto로변환해서 리턴해준다.Story story = findedStory.get();
             Story story = findedStory.get();
 
-            return StoryUploadDto.builder()
+            List<CommentDto> commentDtoList =
+                    story.getCommentList().stream()
+                            .map(comment->
+                                    CommentDto.builder()
+                                            .storyID(comment.getId())
+                                            .content(comment.getContent())
+                                            .author(comment.getAuthor().getUserName())
+                                            .build()
+                                    ).toList();
+            return StoryDto.builder()
                                 .id(story.getId())
                                 .caption(story.getCaption())
                                 .content(story.getContent())
                                 .imgUrl(story.getImgUrl())
+                                .commentList(commentDtoList)
                                 .regDate(story.getRegDate())
                                 .modifyDate(story.getModifyDate())
                             .build();

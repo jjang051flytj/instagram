@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Comment {
+public class Comment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

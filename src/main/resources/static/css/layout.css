@@ -55,22 +55,49 @@ button {
   width: 1200px;
   margin: 100px auto;
 }
+.detail img {
+  max-width: 100%;
+  width: 100%;
+}
 .detail h2 {
   font-size: 20px;
   margin-bottom: 50px;
+}
+.detail .comment-list {
+  padding: 50px 0;
+  border-top: 1px solid #ccc;
+}
+.detail .comment-list li {
+  margin-bottom: 20px;
+}
+.detail .comment-list li .info {
+  display: flex;
+}
+.detail .comment-list li .info .author {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.detail .comment-list li .comment-content {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #eee;
 }
 .detail .comment-box {
   display: flex;
   gap: 10px;
 }
 .detail .comment-box .comment {
-  width: 80%;
+  flex-grow: 1;
   height: 150px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 .detail .comment-box .btn {
   background-color: #0c9ee2;
   color: #fff;
   border-radius: 10px;
+  width: 150px;
+  height: 150px;
 }

@@ -1,6 +1,7 @@
 package com.jjang051.instagram.service;
 
 import com.jjang051.instagram.dao.StoryDao;
+import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
 import com.jjang051.instagram.utils.*;
@@ -67,9 +68,14 @@ public class StorySevice {
     public List<StoryUploadDto> findAll() {
         return storyDao.findAll();
     }
-    public StoryUploadDto findById(int id) {
+    public StoryDto findByDtoId(int id) {
         return storyDao.findByDtoId(id);
     }
+
+    public Story findById(int id) {
+        return storyDao.findById(id);
+    }
+
 
     public String uploadImg(MultipartFile uploadImg) {
         String originalFileName =  uploadImg.getOriginalFilename();

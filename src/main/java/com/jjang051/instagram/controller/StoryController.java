@@ -1,5 +1,6 @@
 package com.jjang051.instagram.controller;
 
+import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
 import com.jjang051.instagram.service.StorySevice;
@@ -44,7 +45,7 @@ public class StoryController {
 
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
-        StoryUploadDto detail = storySevice.findById(id);
+        StoryDto detail = storySevice.findByDtoId(id);
         model.addAttribute("detail", detail);
         return "story/detail";
     }
