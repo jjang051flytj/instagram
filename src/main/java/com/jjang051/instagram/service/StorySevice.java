@@ -3,10 +3,7 @@ package com.jjang051.instagram.service;
 import com.jjang051.instagram.dao.StoryDao;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
-import com.jjang051.instagram.utils.DateTimeRenameStrategy;
-import com.jjang051.instagram.utils.FileRenameStrategy;
-import com.jjang051.instagram.utils.HtmlImageExtractor;
-import com.jjang051.instagram.utils.UUIDFileRenameStrategy;
+import com.jjang051.instagram.utils.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +32,7 @@ public class StorySevice {
 
     public Story write(StoryUploadDto storyDto) {
         String originalFileName =  storyDto.getFile().getOriginalFilename();  //만약에 대표이미지 첨부하지 않아도 되게끔
+        //첨부파일이 있으면 업로드 해라.
         if(originalFileName!=null&&!originalFileName.isEmpty()){
             FileRenameStrategy fileRenameStrategy = new UUIDFileRenameStrategy();
             String renameFileName = fileRenameStrategy.renameFile(originalFileName);
@@ -45,15 +45,17 @@ public class StorySevice {
             }
             storyDto.setImgUrl(renameFileName);
         }
-        if (storyDto.getImgUrl() == null || storyDto.getImgUrl().isEmpty()) {
-            String extractedImgUrl = HtmlImageExtractor.extractFirstImageUrl(storyDto.getContent());
-
-            if (extractedImgUrl != null) {
-                // /upload/abc.jpg 형태로 저장되었다면 경로만 추출
-                String justFileName = extractedImgUrl.substring(extractedImgUrl.lastIndexOf("/") + 1);
-                storyDto.setImgUrl(justFileName);
+        //만약에 대표 이미지가 없으면  글쓰기에서 쓴 이미지 중 제일 첨으 이미지를 대표 이미지로 쓰겠다.
+        if(storyDto.getImgUrl()==null || storyDto.getImgUrl().isEmpty()){
+            String imgSrc = ImgExtractor.extract(storyDto.getContent());
+            if(imgSrc!=null) {
+                String extractImg = imgSrc.substring(imgSrc.lastIndexOf("/")+1);
+                storyDto.setImgUrl(extractImg);
             } else {
-                storyDto.setImgUrl("default.png"); // 기본 이미지 fallback
+                //대표이미지도 없고
+                //글쓰기에 이미지도 올리지 않은 경우
+                storyDto.setImgUrl("story-default.jpg");
+
             }
         }
         Story story = StoryUploadDto.toStory(storyDto);
@@ -63,10 +65,8 @@ public class StorySevice {
     }
 
     public List<StoryUploadDto> findAll() {
-
         return storyDao.findAll();
     }
-
     public StoryUploadDto findById(int id) {
         return storyDao.findById(id);
     }
