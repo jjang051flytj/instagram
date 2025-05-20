@@ -11,10 +11,34 @@
         <h2 th:text="${detail.caption}"></h2>
         <div th:utext="${detail.content}" id="detail"></div>
         <div class="comment-box">
-          <textarea name="comment" class="comment"></textarea>
-          <button class="btn">댓글달기</button>
+          <textarea name="comment" class="comment" id="comment"></textarea>
+          <button class="btn" id="btn-comment">댓글달기</button>
         </div>
       </div>
     </div>
+    <script th:inline="javascript">
+      //타임리프 변수 설정
+      const storyID = /*[[${detail.id}]]*/ 0;
+      const btnComment = document.querySelector("#btn-comment");
+      const comment = document.querySelector("#comment");
+
+      btnComment.addEventListener("click", (e) => {
+        const sendData = {
+          content: comment.value,
+          storyID: storyID,
+        };
+        fetch("/api/comment/write", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sendData),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+          });
+      });
+    </script>
   </body>
 </html>

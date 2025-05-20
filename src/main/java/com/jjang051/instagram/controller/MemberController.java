@@ -44,7 +44,4 @@ public class MemberController {
         }
         return "member/signup";
     }
-
-
-
 }

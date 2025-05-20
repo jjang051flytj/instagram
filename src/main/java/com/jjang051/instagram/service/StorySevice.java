@@ -68,7 +68,7 @@ public class StorySevice {
         return storyDao.findAll();
     }
     public StoryUploadDto findById(int id) {
-        return storyDao.findById(id);
+        return storyDao.findByDtoId(id);
     }
 
     public String uploadImg(MultipartFile uploadImg) {

@@ -34,7 +34,7 @@ public class StoryDao {
         return storyDtoList;
     }
 
-    public StoryUploadDto findById(int id) {
+    public StoryUploadDto findByDtoId(int id) {
         Optional<Story> findedStory = storyRepository.findById(id);
         if(findedStory.isPresent()) {
             //dto로변환해서 리턴해준다.Story story = findedStory.get();
@@ -50,5 +50,9 @@ public class StoryDao {
                             .build();
         }
         throw new IllegalArgumentException("찾을 수 없는 스토리입니다.");
+    }
+
+    public Story findById(int id) {
+        return storyRepository.findById(id).orElse(null);
     }
 }
