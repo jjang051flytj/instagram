@@ -16,5 +16,6 @@ public class CommentDto {
     private String content;
     private String author;
     private int storyID;
-    private LocalDateTime regDate;
+    private LocalDateTime regDate;  //진짜 시간
+    private String strRegDate;      //한시간전 하루전 7일 넘어가면 그냥
 }

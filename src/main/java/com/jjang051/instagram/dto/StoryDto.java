@@ -21,8 +21,9 @@ public class StoryDto {
     private String imgUrl;
     private String content;
     private List<CommentDto> commentList;
-    private LocalDateTime regDate;
     private LocalDateTime modifyDate;
+    private LocalDateTime regDate;
+    private String strRegDate;
 
     public static Story toStory(StoryDto storyDto) {
         return Story.builder()

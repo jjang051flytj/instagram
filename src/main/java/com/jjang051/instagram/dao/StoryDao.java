@@ -5,6 +5,7 @@ import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
 import com.jjang051.instagram.repository.StoryRepository;
+import com.jjang051.instagram.utils.TimeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -49,6 +50,8 @@ public class StoryDao {
                                             .storyID(comment.getId())
                                             .content(comment.getContent())
                                             .author(comment.getAuthor().getUserName())
+                                            .regDate(comment.getRegDate())
+.strRegDate(TimeUtil.getRelativeTime(story.getRegDate()))
                                             .build()
                                     ).toList();
             return StoryDto.builder()
@@ -58,6 +61,7 @@ public class StoryDao {
                                 .imgUrl(story.getImgUrl())
                                 .commentList(commentDtoList)
                                 .regDate(story.getRegDate())
+.strRegDate(TimeUtil.getRelativeTime(story.getRegDate()))
                                 .modifyDate(story.getModifyDate())
                             .build();
         }

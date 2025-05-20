@@ -16,7 +16,7 @@
             <li>
               <div class="info">
                 <div class="author" th:text="${item.author}">글쓴 사람</div>
-                <div>2025-05-21 11:10</div>
+                <div th:text="${item.strRegDate}">2025-05-21 11:10</div>
               </div>
               <div class="comment-content" th:text="${item.content}">글 내용</div>
             </li>
