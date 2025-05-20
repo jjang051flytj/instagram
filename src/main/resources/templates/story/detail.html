@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
-<div>
-    <h2 th:text="${detail.caption}"></h2>
-    <div th:utext="${detail.content}" id="detail">
-
+    <link rel="stylesheet" href="../css/layout.css" />
+  </head>
+  <body>
+    <div>
+      <div class="detail">
+        <h2 th:text="${detail.caption}"></h2>
+        <div th:utext="${detail.content}" id="detail"></div>
+        <div class="comment-box">
+          <textarea name="comment" class="comment"></textarea>
+          <button class="btn">댓글달기</button>
+        </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

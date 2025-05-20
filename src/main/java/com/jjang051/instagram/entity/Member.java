@@ -4,6 +4,8 @@ import com.jjang051.instagram.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @AllArgsConstructor
@@ -30,5 +32,7 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Comment> commentList;
 
 }

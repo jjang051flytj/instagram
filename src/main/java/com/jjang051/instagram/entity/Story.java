@@ -1,17 +1,13 @@
 package com.jjang051.instagram.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class Story extends BaseEntity {
@@ -22,7 +18,7 @@ public class Story extends BaseEntity {
     private String imgUrl;
     private String content;
 
-
-
+    @OneToMany(mappedBy = "story", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Comment> commentList;
 
 }
