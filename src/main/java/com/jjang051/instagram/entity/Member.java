@@ -37,4 +37,11 @@ public class Member extends BaseEntity {
     //@JsonManagedReference
     private List<Comment> commentList;
 
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    //@JsonManagedReference
+    private List<Like> likes;
+
+
+
 }

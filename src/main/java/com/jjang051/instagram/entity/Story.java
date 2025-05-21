@@ -22,4 +22,6 @@ public class Story extends BaseEntity {
     @OrderBy("regDate asc")
     private List<Comment> commentList;
 
+    @OneToMany(mappedBy = "story")
+    private List<Like> likes;
 }

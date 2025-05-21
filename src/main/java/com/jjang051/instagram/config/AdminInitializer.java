@@ -35,5 +35,27 @@ public class AdminInitializer implements CommandLineRunner {
         } else {
             System.out.println("관리자 계정이 이미 있습니다.");
         }
+        Optional<Member> hongMember = memberDao.findByUserID("hong");
+        if(!hongMember.isPresent()) {
+            Member member1 = Member.builder()
+                    .userID("hong")
+                    .userName("홍길동")
+                    .userEmail("hong@naver.com")
+                    .userPW(bCryptPasswordEncoder.encode("1234"))
+                    .role(Role.ROLE_USER)
+                    .build();
+            memberDao.save(member1);
+        }
+        Optional<Member> jjang051Member = memberDao.findByUserID("jjang051");
+        if(!jjang051Member.isPresent()) {
+            Member member2 = Member.builder()
+                    .userID("jjang051")
+                    .userName("장성호")
+                    .userEmail("jjang051@naver.com")
+                    .userPW(bCryptPasswordEncoder.encode("1234"))
+                    .role(Role.ROLE_USER)
+                    .build();
+            memberDao.save(member2);
+        }
     }
 }

@@ -89,6 +89,20 @@ button {
   font-size: 20px;
   margin-bottom: 50px;
 }
+.detail .like-box {
+  font-size: 24px;
+  display: flex;
+}
+.detail .like-box .like-icon {
+  color: #d60505;
+  margin-right: 10px;
+}
+.detail .like-box .like-count {
+  padding: 10px;
+  border-radius: 100px;
+  background-color: #333;
+  color: #fff;
+}
 .detail .comment-list {
   padding: 50px 0;
   border-top: 1px solid #ccc;

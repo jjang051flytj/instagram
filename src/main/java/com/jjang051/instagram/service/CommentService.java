@@ -81,6 +81,7 @@ public class CommentService {
         //entity
         Comment savedComment = commentDao.save(comment);
         CommentDto savedCommentDto = CommentDto.builder()
+                .id(savedComment.getId())
                 .author(savedComment.getAuthor().getUserName())
                 .content(savedComment.getContent())
                 .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))

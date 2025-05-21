@@ -90,7 +90,20 @@ button {
     font-size: 20px;
     margin-bottom: 50px;
   }
-
+  .like-box {
+    font-size: 24px;
+    display: flex;
+    .like-icon {
+      color: #d60505;
+      margin-right: 10px;
+    }
+    .like-count {
+      padding: 10px;
+      border-radius: 100px;
+      background-color: #333;
+      color: #fff;
+    }
+  }
   .comment-list {
     padding: 50px 0;
     border-top: 1px solid #ccc;
