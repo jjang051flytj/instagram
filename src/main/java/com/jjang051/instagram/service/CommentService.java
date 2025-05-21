@@ -87,4 +87,13 @@ public class CommentService {
                 .build();
         return savedCommentDto;
     }
+
+    public CommentDto  deleteById(int id) {
+        Comment comment = commentDao.deletebyId(id);
+        return CommentDto.builder()
+                .author(comment.getAuthor().getUserName())
+                .content(comment.getContent())
+                .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))
+                .build();
+    }
 }

@@ -46,9 +46,7 @@ public class StoryController {
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
         StoryDto detail = storySevice.findByDtoId(id);
-        List<StoryDto> storyList = storySevice.findAll();
         model.addAttribute("detail", detail);
-        model.addAttribute("storyList", storyList);
         return "story/detail";
     }
     @PostMapping("/ck-upload")

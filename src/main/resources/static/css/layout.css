@@ -95,13 +95,25 @@ button {
 }
 .detail .comment-list li {
   margin-bottom: 20px;
+  position: relative;
 }
 .detail .comment-list li .info {
   display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 .detail .comment-list li .info .author {
   font-weight: bold;
   margin-right: 10px;
+}
+.detail .comment-list li .info .btn-box {
+  margin-left: auto;
+}
+.detail .comment-list li .info .btn-box .btn {
+  padding: 10px;
+  background-color: #d60505;
+  border-radius: 5px;
+  color: #fff;
 }
 .detail .comment-list li .comment-content {
   padding: 20px;

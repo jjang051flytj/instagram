@@ -22,6 +22,7 @@ public class StoryDao {
         return storyRepository.save(saveStory); //
     }
 
+    //Story안에 있는 list
     public List<StoryDto> findAll() {
         List<Story> storyList = storyRepository.findAll();
         List<StoryDto> storyDtoList = storyList.stream().map(
@@ -47,9 +48,11 @@ public class StoryDao {
                     story.getCommentList().stream()
                             .map(comment->
                                     CommentDto.builder()
+                                            .id(comment.getId())
                                             .storyID(comment.getId())
                                             .content(comment.getContent())
                                             .author(comment.getAuthor().getUserName())
+                                            .authorID(comment.getAuthor().getUserID())
                                             .regDate(comment.getRegDate())
                                             .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))
                                             .build()

@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDto {
+    private int id;
     private String content;
     private String author;
+    private String authorID;
     private int storyID;
     private LocalDateTime regDate;  //진짜 시간
     private String strRegDate;      //한시간전 하루전 7일 넘어가면 그냥

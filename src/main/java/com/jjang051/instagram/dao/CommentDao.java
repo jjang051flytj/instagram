@@ -28,4 +28,10 @@ public class CommentDao {
         }
         throw new IllegalArgumentException("찾을 수 없는 스토리입니다.");
     }
+
+    public Comment deletebyId(int id) {
+        Comment comment = this.findById(id);
+        commentRepository.deleteById(id);
+        return comment;
+    }
 }

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <title>Title</title>
     <link rel="stylesheet" href="../css/layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        gsap.registerPlugin(Flip)
+        //First Last invert play
+      });
+    </script>
   </head>
   <body>
     <div class="wrap">
@@ -31,7 +41,9 @@
               <div class="info">
                 <div class="author" th:text="${item.author}">글쓴 사람</div>
                 <div th:text="${item.strRegDate}">2025-05-21 11:10</div>
-                <div class="btn-box"><button class="btn btn-delete">삭제</button></div>
+                <div class="btn-box" th:if="${item.authorID==#authentication.principal.loggedMember.userID}">
+                  <button class="btn btn-delete" th:attr="data-id=${item.id}">삭제</button>
+                </div>
               </div>
               <div class="comment-content" th:text="${item.content}">글 내용</div>
             </li>
@@ -59,7 +71,7 @@
           <textarea name="comment" class="comment" id="comment"></textarea>
           <button class="btn" id="btn-comment">댓글달기</button>
         </div>
-      </div?>
+      </div>
     </div>
     <script th:inline="javascript">
       //타임리프 변수 설정
@@ -67,6 +79,47 @@
       const btnComment = document.querySelector("#btn-comment");
       const comment = document.querySelector("#comment");
       const commentList = document.querySelector("#comment-list");
+      /*
+      const btnDelete = document.querySelectorAll("#comment-list li .btn-delete");
+      //클릭이벤트 걸어서 console창에 본인 id찍히게...
+      btnDelete.forEach((btn)=>{
+        btn.addEventListener("click",(e)=>{
+          const id = btn.dataset.id;
+            console.log(id);
+        })
+      })
+        */
+       //1번째 타임리프 sec이용
+       //2번째는  controller에서  로그인한 사람 내려주는 방법
+       commentList.addEventListener("click",(e)=>{
+          const btnDelete = e.target.closest("button");
+          if(btnDelete.classList.contains("btn-delete")) {
+            const id = btnDelete.dataset.id;
+            if(confirm("삭제하시겠습니까?")) {
+              fetch(`/api/comment/delete/${id}`,{
+                method:"delete"
+              })
+              .then(response=>response.json())
+              .then(json=>{
+                if(json.isDelete) {
+                  //삭제 코드
+                  const li = e.target.closest("li");
+                  const state = Flip.getState(".comment-list li");
+                  li.remove();
+                  Flip.from(state,{duration:0.5,ease:"power1.inOut",stagger:0.05})
+                  /*
+                  gsap.to(li,{x:-300,autoAlpha:0,ease:"back.inOut",duration:1,onComplete:()=>{
+                    li.remove();
+                  }})
+                    */
+                  //li.remove();
+                } else {
+                  //잘못됐다....
+                }
+              })
+            }
+          }
+       })
 
       btnComment.addEventListener("click", (e) => {
         const sendData = {
@@ -91,6 +144,7 @@
               <div class="info">
                 <div class="author">${json.returnComment.author}</div>
                 <div>${json.returnComment.strRegDate}</div>
+                <div class="btn-box"><button class="btn btn-delete">삭제</button></div>
               </div>
               <div class="comment-content">${json.returnComment.content}</div>
             </li>`)

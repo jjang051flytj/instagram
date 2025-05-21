@@ -19,6 +19,7 @@ public class Story extends BaseEntity {
     private String content;
 
     @OneToMany(mappedBy = "story", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OrderBy("regDate asc")
     private List<Comment> commentList;
 
 }

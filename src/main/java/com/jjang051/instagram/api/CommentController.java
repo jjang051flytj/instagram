@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,14 +29,28 @@ public class CommentController {
         log.info("commentDto: {}", commentDto);
         Map<String,Object> resultMap = new HashMap<>();
         commentDto.setAuthor(customUserDetails.getLoggedMember().getUserID());
-        Comment returnComment = commentService.save(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
-        //CommentDto returnComment = commentService.saveCommentDto(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
+        //Comment returnComment = commentService.save(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
+        CommentDto returnComment = commentService.saveCommentDto(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
         if(returnComment != null) {
             resultMap.put("isInsert",true);
             resultMap.put("returnComment",returnComment);
         } else {
             resultMap.put("isInsert",false);
             resultMap.put("returnComment",null);
+        }
+        return resultMap;
+    }
+
+    @DeleteMapping("/comment/delete/{id}")
+    public Map<String,Object> deleteComment(@PathVariable int id) {
+        log.info("id: {}", id);
+        //삭제 시켜보기....
+        CommentDto commentDto = commentService.deleteById(id);
+        Map<String,Object> resultMap = new HashMap<>();
+        if(commentDto != null) {
+            resultMap.put("isDelete",true);
+        } else {
+            resultMap.put("isDelete",false);
         }
         return resultMap;
     }
