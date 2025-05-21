@@ -24,7 +24,39 @@ public class CommentService {
 
 
     @Transactional
-    public CommentDto save(CommentDto commentDto) {
+    public Comment save(CommentDto commentDto) {
+        /*
+        StoryUploadDto storyUploadDto =
+                storyDao.findByDtoId(commentDto.getStoryID());
+        Story story =  storyUploadDto.toStory(); //dto를 entity로 바꿔서 저장
+        //commentDto를 comment로 바꿔서
+        storyDao.save(story); //toStory()에 id가 없음 //영속화가 진행된다.
+        */
+        //save를 하지않고 처리
+        Story story02 =  storyDao.findById(commentDto.getStoryID()); //같은 entity를 보장받고 있음
+
+        Member member =  null;
+        Optional<Member> finedMember =
+                memberDao.findByUserID(commentDto.getAuthor());
+        if(finedMember.isPresent()) {
+            member = finedMember.get();
+        }
+        Comment comment = Comment.builder()
+                .author(member)
+                .content(commentDto.getContent())
+                .story(story02)
+                .build();
+        //entity
+        Comment savedComment = commentDao.save(comment);
+        CommentDto savedCommentDto = CommentDto.builder()
+                .author(savedComment.getAuthor().getUserName())
+                .content(savedComment.getContent())
+                .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))
+                .build();
+        return savedComment;
+    }
+    @Transactional
+    public CommentDto saveCommentDto(CommentDto commentDto) {
         /*
         StoryUploadDto storyUploadDto =
                 storyDao.findByDtoId(commentDto.getStoryID());

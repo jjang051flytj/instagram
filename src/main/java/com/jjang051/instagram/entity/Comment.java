@@ -1,5 +1,8 @@
 package com.jjang051.instagram.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,10 +24,13 @@ public class Comment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID", referencedColumnName = "userID") //comment table에 userID 컬럼이 생긴다.
+    //@JsonBackReference
+    @JsonIgnoreProperties({"commentList","userPW","userEmail","role"})
     private Member author;  //"hong"
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="storyID")
+    @JsonIgnoreProperties({"commentList"})
     private Story story;  //1
 
     @Builder

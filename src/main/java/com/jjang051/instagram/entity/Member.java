@@ -1,5 +1,6 @@
 package com.jjang051.instagram.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jjang051.instagram.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,7 @@ public class Member extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    //@JsonManagedReference
     private List<Comment> commentList;
 
 }
