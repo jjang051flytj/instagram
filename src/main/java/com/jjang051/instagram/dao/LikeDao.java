@@ -14,4 +14,8 @@ public class LikeDao {
     public int like(int id, String userID) {
         return likeRepository.like(id,userID);
     }
+
+    public int hate(int id, String userID) {
+        return likeRepository.hate(id,userID);
+    }
 }

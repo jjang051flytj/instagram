@@ -13,6 +13,14 @@ public interface LikeRepository extends JpaRepository<Like, Integer> {
 
     @Modifying
     @Query(value = "INSERT INTO insta_like(id,storyID,userID,regDate,modifyDate) values " +
-            "(INSTA_LIKE_SEQ.NEXTVAL,:storyID,:userID,sysdate,sysdate)",nativeQuery = true)
+            "(INSTA_LIKE_SEQ.NEXTVAL,:storyID,:userID,sysdate,sysdate)",
+            nativeQuery = true)
     int like(@Param("storyID") int id, @Param("userID") String userID);
+
+    @Modifying
+    @Query(value = "DELETE FROM insta_like WHERE storyID =:storyID AND userID = :userID",
+            nativeQuery = true)
+    int hate(@Param("storyID") int id, @Param("userID") String userID);
+
+
 }

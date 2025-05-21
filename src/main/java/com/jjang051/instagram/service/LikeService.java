@@ -14,4 +14,8 @@ public class LikeService {
     public int like(int id, String userID) {
         return likeDao.like(id, userID);
     }
+    @Transactional
+    public int hate(int id, String userID) {
+        return likeDao.hate(id, userID);
+    }
 }
