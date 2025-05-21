@@ -8,6 +8,7 @@ import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Comment;
 import com.jjang051.instagram.entity.Member;
 import com.jjang051.instagram.entity.Story;
+import com.jjang051.instagram.utils.TimeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class CommentService {
 
 
     @Transactional
-    public Comment save(CommentDto commentDto) {
+    public CommentDto save(CommentDto commentDto) {
         /*
         StoryUploadDto storyUploadDto =
                 storyDao.findByDtoId(commentDto.getStoryID());
@@ -46,6 +47,12 @@ public class CommentService {
                 .story(story02)
                 .build();
         //entity
-        return commentDao.save(comment);
+        Comment savedComment = commentDao.save(comment);
+        CommentDto savedCommentDto = CommentDto.builder()
+                .author(savedComment.getAuthor().getUserName())
+                .content(savedComment.getContent())
+                .strRegDate(TimeUtil.getRelativeTime(comment.getRegDate()))
+                .build();
+        return savedCommentDto;
     }
 }

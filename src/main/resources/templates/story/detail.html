@@ -25,12 +25,13 @@
         <h2 th:text="${detail.caption}"></h2>
         <div th:utext="${detail.content}" id="detail"></div>
         <div class="comment-list-box">
-          <ul class="comment-list">
+          <ul class="comment-list" id="comment-list">
             <th:block th:each="item:${detail.commentList}">
             <li>
               <div class="info">
                 <div class="author" th:text="${item.author}">글쓴 사람</div>
                 <div th:text="${item.strRegDate}">2025-05-21 11:10</div>
+                <div class="btn-box"><button class="btn btn-delete">삭제</button></div>
               </div>
               <div class="comment-content" th:text="${item.content}">글 내용</div>
             </li>
@@ -65,6 +66,7 @@
       const storyID = /*[[${detail.id}]]*/ 0;
       const btnComment = document.querySelector("#btn-comment");
       const comment = document.querySelector("#comment");
+      const commentList = document.querySelector("#comment-list");
 
       btnComment.addEventListener("click", (e) => {
         const sendData = {
@@ -81,6 +83,20 @@
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
+            if(json.isInsert) {
+              //제대로 들어감
+              //console.log("isInsert true");
+              //location.reload();
+              commentList.insertAdjacentHTML("beforeend",`<li>
+              <div class="info">
+                <div class="author">${json.returnComment.author}</div>
+                <div>${json.returnComment.strRegDate}</div>
+              </div>
+              <div class="comment-content">${json.returnComment.content}</div>
+            </li>`)
+            } else {
+                alert("알 수 없는 오류로 글이 입력되지 않았습니다. 잠시 후 다시 시도해 주세요");
+            }
           });
       });
     </script>

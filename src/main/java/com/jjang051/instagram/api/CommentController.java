@@ -32,8 +32,14 @@ public class CommentController {
         log.info("commentDto: {}", commentDto);
         Map<String,Object> resultMap = new HashMap<>();
         commentDto.setAuthor(customUserDetails.getLoggedMember().getUserID());
-        commentService.save(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
-        resultMap.put("success",true);
+        CommentDto returnComment = commentService.save(commentDto);  //storyID:1, content:"댓글을 씁니다",author:"hong"
+        if(returnComment != null) {
+            resultMap.put("isInsert",true);
+            resultMap.put("returnComment",returnComment);
+        } else {
+            resultMap.put("isInsert",false);
+            resultMap.put("returnComment",null);
+        }
         return resultMap;
     }
 }

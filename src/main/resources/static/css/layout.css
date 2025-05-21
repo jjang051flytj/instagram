@@ -23,14 +23,8 @@ button {
   background: none;
 }
 
-.wrap {
-  display: flex;
-  width: 1200px;
-  margin: 100px auto;
-}
-
 .story-thumb-list {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
 }
@@ -58,7 +52,8 @@ button {
 .story-list {
   display: flex;
   flex-wrap: wrap;
-  width: 900px;
+  width: 1200px;
+  margin: 100px auto;
   gap: 10px;
 }
 .story-list li {
