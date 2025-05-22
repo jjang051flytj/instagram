@@ -97,83 +97,6 @@ button {
   font-size: 18px;
 }
 
-.detail {
-  width: 1200px;
-  margin: 100px auto;
-}
-.detail img {
-  max-width: 100%;
-  width: 100%;
-}
-.detail h2 {
-  font-size: 20px;
-  margin-bottom: 50px;
-}
-.detail .like-box {
-  font-size: 24px;
-  display: flex;
-}
-.detail .like-box .like-icon {
-  color: #d60505;
-  margin-right: 10px;
-}
-.detail .like-box .like-count {
-  padding: 10px;
-  border-radius: 100px;
-  background-color: #333;
-  color: #fff;
-}
-.detail .comment-list {
-  padding: 50px 0;
-  border-top: 1px solid #ccc;
-}
-.detail .comment-list li {
-  margin-bottom: 20px;
-  position: relative;
-}
-.detail .comment-list li .info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.detail .comment-list li .info .author {
-  font-weight: bold;
-  margin-right: 10px;
-}
-.detail .comment-list li .info .btn-box {
-  margin-left: auto;
-}
-.detail .comment-list li .info .btn-box .btn {
-  padding: 10px;
-  background-color: #d60505;
-  border-radius: 5px;
-  color: #fff;
-}
-.detail .comment-list li .comment-content {
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #eee;
-}
-.detail .comment-box {
-  display: flex;
-  gap: 10px;
-}
-.detail .comment-box .comment {
-  flex-grow: 1;
-  height: 150px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.detail .comment-box .btn {
-  background-color: #0c9ee2;
-  color: #fff;
-  border-radius: 10px;
-  width: 150px;
-  height: 150px;
-}
-
 .container {
   width: 1200px;
   margin: 0 auto;
@@ -322,6 +245,98 @@ button {
 .detail-box {
   width: 1200px;
   margin: 100px auto;
+}
+.detail-box .detail {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+.detail-box #detail {
+  display: none !important;
+}
+.detail-box .detail-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+.detail-box .detail-header .thumbnail img {
+  width: 80px;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100px;
+  border: 1px solid #ccc;
+}
+.detail-box .detail-header .user-name {
+  font-weight: 700;
+}
+.detail-box .title-img img {
+  max-width: 100%;
+}
+.detail-box .like-box {
+  font-size: 24px;
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+}
+.detail-box .like-box .like-icon {
+  color: #d60505;
+  margin-right: 10px;
+}
+.detail-box .like-box .like-count {
+  padding: 10px;
+  border-radius: 100px;
+  background-color: #333;
+  color: #fff;
+}
+.detail-box .comment-list {
+  padding: 50px 0;
+}
+.detail-box .comment-list li {
+  margin-bottom: 20px;
+  position: relative;
+}
+.detail-box .comment-list li .info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.detail-box .comment-list li .info .author {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.detail-box .comment-list li .info .btn-box {
+  margin-left: auto;
+}
+.detail-box .comment-list li .info .btn-box .btn {
+  padding: 10px;
+  background-color: #d60505;
+  border-radius: 5px;
+  color: #fff;
+}
+.detail-box .comment-list li .comment-content {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+.detail-box .comment-box {
+  display: flex;
+  gap: 10px;
+}
+.detail-box .comment-box .comment {
+  flex-grow: 1;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.detail-box .comment-box .btn {
+  background-color: #0c9ee2;
+  color: #fff;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
 }
 
 footer {

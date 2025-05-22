@@ -96,82 +96,6 @@ button {
   }
 }
 
-.detail {
-  width: 1200px;
-  margin: 100px auto;
-  img {
-    max-width: 100%;
-    width: 100%;
-  }
-  h2 {
-    font-size: 20px;
-    margin-bottom: 50px;
-  }
-  .like-box {
-    font-size: 24px;
-    display: flex;
-    .like-icon {
-      color: #d60505;
-      margin-right: 10px;
-    }
-    .like-count {
-      padding: 10px;
-      border-radius: 100px;
-      background-color: #333;
-      color: #fff;
-    }
-  }
-  .comment-list {
-    padding: 50px 0;
-    border-top: 1px solid #ccc;
-    li {
-      margin-bottom: 20px;
-      position: relative;
-      .info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        .author {
-          font-weight: bold;
-          margin-right: 10px;
-        }
-        .btn-box {
-          margin-left: auto;
-          .btn {
-            padding: 10px;
-            background-color: #d60505;
-            border-radius: 5px;
-            color: #fff;
-          }
-        }
-      }
-      .comment-content {
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #eee;
-      }
-    }
-  }
-  .comment-box {
-    display: flex;
-    gap: 10px;
-    .comment {
-      flex-grow: 1;
-      height: 150px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .btn {
-      background-color: #0c9ee2;
-      color: #fff;
-      border-radius: 10px;
-      width: 150px;
-      height: 150px;
-    }
-  }
-}
 .container {
   width: 1200px;
   margin: 0 auto;
@@ -319,6 +243,101 @@ button {
 .detail-box {
   width: 1200px;
   margin: 100px auto;
+  .detail {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
+  #detail {
+    display: none !important;
+  }
+  .detail-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    .thumbnail {
+      img {
+        width: 80px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 100px;
+        border: 1px solid #ccc;
+      }
+    }
+    .user-name {
+      font-weight: 700;
+    }
+  }
+  .title-img {
+    img {
+      max-width: 100%;
+    }
+  }
+  .like-box {
+    font-size: 24px;
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    .like-icon {
+      color: #d60505;
+      margin-right: 10px;
+    }
+    .like-count {
+      padding: 10px;
+      border-radius: 100px;
+      background-color: #333;
+      color: #fff;
+    }
+  }
+  .comment-list {
+    padding: 50px 0;
+    li {
+      margin-bottom: 20px;
+      position: relative;
+      .info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .author {
+          font-weight: bold;
+          margin-right: 10px;
+        }
+        .btn-box {
+          margin-left: auto;
+          .btn {
+            padding: 10px;
+            background-color: #d60505;
+            border-radius: 5px;
+            color: #fff;
+          }
+        }
+      }
+      .comment-content {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #eee;
+      }
+    }
+  }
+  .comment-box {
+    display: flex;
+    gap: 10px;
+    .comment {
+      flex-grow: 1;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .btn {
+      background-color: #0c9ee2;
+      color: #fff;
+      border-radius: 10px;
+      width: 150px;
+      height: 150px;
+    }
+  }
 }
 footer {
   display: flex;

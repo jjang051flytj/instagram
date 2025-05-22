@@ -53,7 +53,7 @@
           <h2>jjang051's media lab</h2>
           <ul>
             <li><a href="/story/write">스토리등록</a></li>
-            <li><a href="">구독하기</a></li>
+            <li><a href="" id="btn-subscribe">구독하기</a></li>
             <li><a href="">설정하기</a></li>
           </ul>
         </div>
@@ -108,5 +108,18 @@
     </div>
   </div>
 </div>
+<script>
+  const btnSubscribe = document.querySelector("#btn-subscribe");
+  btnSubscribe.addEventListener("click",(e)=>{
+    e.preventDefault();
+    fetch("/api/subscribe/jjang051/hong",{
+      method:"post"
+    })
+            .then(response=>response.json())
+            .then(json=>{
+              console.log("구독 성공")
+            })
+  })
+</script>
 </body>
 </html>
