@@ -1,46 +1,21 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<header th:replace="~{fragments/header}"></header>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", (event) => {
-        gsap.registerPlugin(Flip);
-        //First Last invert play
-      });
-    </script>
-  </head>
   <body>
-    <div class="wrap">
-      <!--
-      <div class="story-thumb-list">
-        <th:block th:each="story : ${storyList}">
-          <li class="mb-3">
-            <a th:href="@{/story/detail/{id}(id=${story.id})}">
-              <div class="thumbnail">
-                <img src="" th:src="@{|/upload/${story.imgUrl}|}">
-              </div>
-              <strong th:text="${story.caption}">제목</strong>
-            </a>
-            <p class="text-muted" th:text="${story.strRegDate}">작성일</p>
-          </li>
-        </th:block>
-      </div>
-      -->
+    <div class="detail-box">
       <div class="detail">
-        <h2 th:text="${detail.caption}"></h2>
+        <div class="detail-header">
+          <div class="thumbnail">
+            <img src="/images/profile.jpg" >
+          </div>
+          <h2 th:text="${detail.caption}"></h2>
+        </div>
+        <div class="title-img">
+          <img src="" th:src="@{|/upload/${detail.imgUrl}|}">
+        </div>
         <div th:utext="${detail.content}" id="detail"></div>
         <div class="like-box">
           <span class="like-icon" id="like-icon" data-state="like">
@@ -69,31 +44,15 @@
                 </div>
               </li>
             </th:block>
-            <!--
-            <li>
-              <div class="info">
-                <div>글쓴 사람</div>
-                <div>2025-05-21 11:10</div>
-              </div>
-              <div class="comment-content">글 내용</div>
-            </li>
-            <li>
-              <div class="info">
-                <div>글쓴 사람</div>
-                <div>2025-05-21 11:10</div>
-              </div>
-              <div class="comment-content">글 내용</div>
-            </li>
-            -->
           </ul>
         </div>
-
         <div class="comment-box">
           <textarea name="comment" class="comment" id="comment"></textarea>
           <button class="btn" id="btn-comment">댓글달기</button>
         </div>
       </div>
     </div>
+    <footer th:replace="~{fragments/footer}"></footer>
     <script th:inline="javascript">
       //타임리프 변수 설정
       const storyID = /*[[${detail.id}]]*/ 0;
