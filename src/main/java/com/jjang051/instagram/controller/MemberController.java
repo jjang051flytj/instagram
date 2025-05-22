@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/member")
@@ -43,5 +40,13 @@ public class MemberController {
             return "redirect:/member/login";
         }
         return "member/signup";
+    }
+
+    @GetMapping("/info/{userID}")
+    public String info(@PathVariable("userID") String userID, Model model) {
+        Member myInfo = memberService.findByUserID(userID);
+        model.addAttribute("myInfo",myInfo);
+        log.info("myInfo:{}",myInfo.getStoryList());
+        return "member/info";
     }
 }

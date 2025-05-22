@@ -34,8 +34,16 @@ public class Member extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    //@JsonManagedReference
     private List<Comment> commentList;
+
+
+    //나는 여기 테이블에 컬럼을 만들지 않겠다.
+    //보통의 경우 Many쪽이 연관관계의 주인이 된다. 즉 Many쪽에 컬럼이 생긴다.
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Story> storyList;
+
+
+
 
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY,cascade = CascadeType.ALL)

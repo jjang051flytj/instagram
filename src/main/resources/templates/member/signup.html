@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="~{fragments/head}"></head>
 <body>
+<header th:replace="~{fragments/header}"></header>
+<div class="signup">
+  <div class="logo-box"><img src="/images/logo.png" /></div>
   <form action="/member/signup" method="post" th:object="${memberDto}">
-    <div>
-      <input type="text" name="userID" th:field="*{userID}">
-      <div th:errors="*{userID}"></div>
+    <div class="input-box">
+      <input type="text" name="userID" th:field="*{userID}" />
+      <div class="error" th:errors="*{userID}"></div>
     </div>
-
-    <div>
-      <input type="text" name="userPW" th:field="*{userPW}">
-      <div th:errors="*{userPW}"></div>
+    <div class="input-box">
+      <input type="text" name="userPW" th:field="*{userPW}" />
+      <div class="error" th:errors="*{userPW}"></div>
     </div>
-    <div>
-      <input type="text" name="userEmail" th:field="*{userEmail}">
-      <div th:errors="*{userEmail}"></div>
+    <div class="input-box">
+      <input type="text" name="userEmail" th:field="*{userEmail}" />
+      <div class="error" th:errors="*{userEmail}"></div>
     </div>
-    <div>
-      <input type="text" name="userName" th:field="*{userName}">
-      <div th:errors="*{userName}"></div>
+    <div class="input-box">
+      <input type="text" name="userName" th:field="*{userName}" />
+      <div class="error" th:errors="*{userName}"></div>
     </div>
-    <div>
+    <div class="input-box">
       <button>SIGN UP</button>
     </div>
   </form>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

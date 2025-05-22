@@ -24,4 +24,8 @@ public class Story extends BaseEntity {
 
     @OneToMany(mappedBy = "story")
     private List<Like> likes;
+
+    @ManyToOne
+    @JoinColumn(name="userID",referencedColumnName = "userID")
+    private Member member;
 }

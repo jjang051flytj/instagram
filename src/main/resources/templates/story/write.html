@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.1.0/ckeditor5.css" crossorigin>
-
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
 <body>
-    <form method="post" action="/story/write" enctype="multipart/form-data">
-        <div><input type="file" name="file" id="file"></div>
-        <div class="preview-box">
-            <img src=""  id="preview">
-        </div>
-        <div>
-            <input type="text" name="caption">
-        </div>
-        <div>
-            <textarea type="text" name="content" id="content"></textarea>
-        </div>
+<header th:replace="~{fragments/header}"></header>
+    <div class="upload-box">
+        <form method="post" action="/story/write" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="file" id="file">
+            </div>
+            <div class="preview-box">
+                <img src=""  id="preview">
+            </div>
+            <div>
+                <input type="text" name="caption">
+            </div>
+            <div>
+                <textarea type="text" name="content" id="content"></textarea>
+            </div>
+            <div>
+                <button>UPLOAD</button>
+            </div>
+        </form>
+    </div>
+    <footer th:replace="~{fragments/footer}"></footer>
 
-        <div>
-            <button>UPLOAD</button>
-        </div>
-    </form>
-    >
     <script src="https://cdn.ckeditor.com/ckeditor5/45.1.0/ckeditor5.umd.js" crossorigin></script>
     <script>
         /**

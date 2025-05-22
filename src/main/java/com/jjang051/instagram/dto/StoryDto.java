@@ -25,11 +25,19 @@ public class StoryDto {
     private LocalDateTime regDate;
     private String strRegDate;
 
+
+    private int likeCount;
+    private int commentCount;
+    private boolean likeState;
+
+    private Member member;
+
     public static Story toStory(StoryDto storyDto) {
         return Story.builder()
                 .imgUrl(storyDto.imgUrl)
                 .caption(storyDto.caption)
                 .content(storyDto.content)
+                .member(storyDto.member)
                 .build();
     }
 
@@ -38,6 +46,7 @@ public class StoryDto {
                 .imgUrl(this.imgUrl)
                 .caption(this.caption)
                 .content(this.content)
+                .member(this.member)
                 .build();
     }
 }

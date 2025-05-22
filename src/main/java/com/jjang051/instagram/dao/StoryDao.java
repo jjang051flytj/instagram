@@ -43,7 +43,7 @@ public class StoryDao {
         if(findedStory.isPresent()) {
             //dto로변환해서 리턴해준다.Story story = findedStory.get();
             Story story = findedStory.get();
-
+            int likeCount =  story.getLikes().size();
             List<CommentDto> commentDtoList =
                     story.getCommentList().stream()
                             .map(comment->
@@ -64,7 +64,9 @@ public class StoryDao {
                                 .imgUrl(story.getImgUrl())
                                 .commentList(commentDtoList)
                                 .regDate(story.getRegDate())
+                                .likeCount(likeCount)
                                 .modifyDate(story.getModifyDate())
+
                             .build();
         }
         throw new IllegalArgumentException("찾을 수 없는 스토리입니다.");

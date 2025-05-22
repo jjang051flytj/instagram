@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:replace="~{fragments/head}"></head>
 <body>
-    <h1>hello</h1>
-<ul>
-    <li><a href="../story/write">story</a></li>
-    <li><a href="../story/list">list</a></li>
-    <li><a href="../member/signup">sign up</a></li>
-    <li><a href="../member/login">login</a></li>
-</ul>
+<header th:replace="~{fragments/header}">
+</header>
+<footer th:replace="~{fragments/footer}">
+</footer>
 </body>
 </html>

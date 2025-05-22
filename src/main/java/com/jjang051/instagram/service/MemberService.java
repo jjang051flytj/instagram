@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,13 @@ public class MemberService {
 
     public int deleteByUserID(String userID) {
         return memberDao.deleteByUserID(userID);
+    }
+
+    public Member findByUserID(String userID) {
+        Optional<Member> optionalMember = memberDao.findByUserID(userID);
+        if(optionalMember.isPresent()){
+            return optionalMember.get();
+        }
+        return null;
     }
 }

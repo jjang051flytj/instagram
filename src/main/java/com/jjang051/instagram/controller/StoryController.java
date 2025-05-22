@@ -1,11 +1,13 @@
 package com.jjang051.instagram.controller;
 
+import com.jjang051.instagram.dto.CustomUserDetails;
 import com.jjang051.instagram.dto.StoryDto;
 import com.jjang051.instagram.dto.StoryUploadDto;
 import com.jjang051.instagram.entity.Story;
 import com.jjang051.instagram.service.StorySevice;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +31,10 @@ public class StoryController {
     }
 
     @PostMapping("/write")
-    public String write(@ModelAttribute StoryDto storyDto) {
+    public String write(@ModelAttribute StoryDto storyDto,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         log.info("storyDto: {}", storyDto);
         //service == business logic
+        storyDto.setMember(customUserDetails.getLoggedMember());
         Story story = storySevice.write(storyDto);
         return "redirect:/story/list";
     }
