@@ -57,5 +57,28 @@ public class AdminInitializer implements CommandLineRunner {
                     .build();
             memberDao.save(member2);
         }
+        Optional<Member> jjang052Member = memberDao.findByUserID("jjang052");
+        if(!jjang052Member.isPresent()) {
+            Member member2 = Member.builder()
+                    .userID("jjang052")
+                    .userName("유재석")
+                    .userEmail("jjang052@naver.com")
+                    .userPW(bCryptPasswordEncoder.encode("1234"))
+                    .role(Role.ROLE_USER)
+                    .build();
+            memberDao.save(member2);
+        }
+        Optional<Member> jjang053Member = memberDao.findByUserID("jjang053");
+        if(!jjang053Member.isPresent()) {
+            Member member2 = Member.builder()
+                    .userID("jjang053")
+                    .userName("정형돈")
+                    .userEmail("jjang053@naver.com")
+                    .userPW(bCryptPasswordEncoder.encode("1234"))
+                    .role(Role.ROLE_USER)
+                    .build();
+            memberDao.save(member2);
+        }
+
     }
 }

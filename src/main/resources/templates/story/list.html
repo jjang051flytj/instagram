@@ -1,29 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../css/layout.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
 <body>
+  <header th:replace="~{fragments/header}"></header>
+  <div class="story-list-box">
   <ul class="story-list">
     <th:block th:each="item:${storyUploadDtoList}">
     <li>
-      <!--<a href="" th:href="@{/story/{id}(id=${item.id})}">-->
-      <a href="" th:href="@{|/story/${item.id}|}">
-
+      <a href="" th:href="@{/story/{id}(id=${item.id})}">
         <div class="img-box">
           <img src="" th:src="@{|/upload/${item.imgUrl}|}">
         </div>
         <div class="txt-box">
           <h2 th:text="${item.caption}">제목</h2>
-<!--          <p th:text="${item.content}">-->
-<!--            간추린 내용-->
-<!--          </p>-->
         </div>
       </a>
     </li>
     </th:block>
   </ul>
+  </div>
 </body>
 </html>

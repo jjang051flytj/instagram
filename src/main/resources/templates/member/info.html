@@ -46,6 +46,9 @@
             <li><a href="/story/write">스토리등록</a></li>
             <li><a href="" id="btn-subscribe">구독하기</a></li>
             <li><a href="">설정하기</a></li>
+            <li>
+              <a th:if="${#authentication != null}" href="/member/logout">로그아웃</a>
+            </li>
           </ul>
         </div>
         <div class="lower">
