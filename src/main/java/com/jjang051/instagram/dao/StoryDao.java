@@ -59,6 +59,7 @@ public class StoryDao {
                                     ).toList();
             return StoryDto.builder()
                                 .id(story.getId())
+                                .member(story.getMember())
                                 .caption(story.getCaption())
                                 .content(story.getContent())
                                 .imgUrl(story.getImgUrl())

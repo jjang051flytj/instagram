@@ -8,11 +8,11 @@
     <div class="detail-box">
       <div class="detail">
         <div class="detail-header">
-          <a href="" th:href="@{/member/info/hong}">
+          <a href="" th:href="@{/member/info/{userID}(userID=${detail.member.userID})}">
             <div class="thumbnail">
               <img src="/images/profile.jpg" >
             </div>
-            <div class="user-name">장성호</div>
+            <div class="user-name" th:text="${detail.member.userName}"></div>
           </a>
           <!--<h2 th:text="${detail.caption}"></h2>-->
         </div>

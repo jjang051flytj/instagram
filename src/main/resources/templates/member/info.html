@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<head>
-  <meta charset="UTF-8" />
-  <title>Title</title>
-  <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
-  <link rel="stylesheet" href="/css/layout.css" />
-</head>
+<head th:replace="~{fragments/head}"></head>
 <body>
-<header class="header">
+<header class="header" th:replace="~{fragments/header}">
   <div class="container">
     <h1>
       <a href="/index/index"><img src="/images/logo.png" alt="" /></a>
@@ -108,16 +99,23 @@
     </div>
   </div>
 </div>
-<script>
+<script th:inline="javascript">
+  //로그인한 사람이
+  const toMemberID = /*[[${myInfo.userID}]]*/ jjang051;
   const btnSubscribe = document.querySelector("#btn-subscribe");
   btnSubscribe.addEventListener("click",(e)=>{
     e.preventDefault();
-    fetch("/api/subscribe/jjang051/hong",{
+    fetch(`/api/subscribe/${toMemberID}`,{
       method:"post"
     })
             .then(response=>response.json())
             .then(json=>{
-              console.log("구독 성공")
+              console.log("구독 성공");
+              if(json.isSubscribe) {
+                alert("구독성공");
+              } else {
+                alert("구독실패");
+              }
             })
   })
 </script>
