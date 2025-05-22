@@ -1,8 +1,13 @@
 package com.jjang051.instagram.dao;
 
+import com.jjang051.instagram.dto.SubscribeDto;
+import com.jjang051.instagram.entity.Member;
 import com.jjang051.instagram.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -11,5 +16,17 @@ public class SubscribeDao {
 
     public int subscribe(String fromMemberID, String toMemberID) {
         return subscribeRepository.subscribe(fromMemberID, toMemberID);
+    }
+
+    public List<SubscribeDto> getSubscribeList(String currentUserID, String targetUserID) {
+        List<Member> subscribedMembers = subscribeRepository.findSubscribedUsers(targetUserID);
+
+        return subscribedMembers.stream().map(member -> SubscribeDto.builder()
+                .userID(member.getUserID())
+                .userName(member.getUserName())
+                .userEmail(member.getUserEmail())
+                .isMe(member.getUserID().equals(currentUserID))
+                .build()
+        ).toList();
     }
 }

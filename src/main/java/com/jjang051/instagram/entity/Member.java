@@ -43,7 +43,11 @@ public class Member extends BaseEntity {
     private List<Story> storyList;
 
 
+    @OneToMany(mappedBy = "fromMember", fetch = FetchType.LAZY)
+    private List<Subscribe> subscribesFromMe; // 내가 구독하는 사람들
 
+    @OneToMany(mappedBy = "toMember", fetch = FetchType.LAZY)
+    private List<Subscribe> subscribesToMe;   // 나를 구독한 사람들
 
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY,cascade = CascadeType.ALL)

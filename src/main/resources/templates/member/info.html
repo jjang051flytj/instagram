@@ -60,6 +60,20 @@
         </div>
       </div>
     </div>
+    <div class="subscribe-list">
+      <ul>
+        <th:block th:each="member : ${subscribeList}">
+          <li>
+            <a th:href="@{/member/info/{userID}(userID=${member.userID})}">
+<!--              <img th:src="@{/upload/{img}(img=${member.profileImg})}" alt="profile">-->
+              <img src="/images/profile.jpg">
+              <div th:text="${member.userName}">유저이름</div>
+            </a>
+          </li>
+        </th:block>
+      </ul>
+
+    </div>
     <div class="story-list-box">
       <ul>
         <th:block th:each="item:${myInfo.storyList}">
@@ -102,6 +116,7 @@
     </div>
   </div>
 </div>
+<footer th:replace="~{fragments/footer}"></footer>
 <script th:inline="javascript">
   //로그인한 사람이
   const toMemberID = /*[[${myInfo.userID}]]*/ jjang051;
