@@ -60,7 +60,14 @@
           <th:block th:unless="${myInfo.pageOwner}">
             <ul>
               <!--<li><a href="/story/write">스토리등록</a></li>-->
-              <li><a href="" id="btn-subscribe" data-subscribe="yes">구독하기</a></li>
+              <li>
+                <th:block th:if="${myInfo.subscribeStatus}">
+                  <a href="" id="btn-subscribe" data-subscribe="no">구독취소</a>
+                </th:block>
+                <th:block th:unless="${myInfo.subscribeStatus}">
+                  <a href="" id="btn-subscribe" data-subscribe="yes">구독하기</a>
+                </th:block>
+              </li>
               <!--<li><a href="">설정하기</a></li>-->
               <!--
               <li>

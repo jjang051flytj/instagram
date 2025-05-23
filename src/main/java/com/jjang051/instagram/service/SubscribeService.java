@@ -18,9 +18,14 @@ public class SubscribeService {
         return subscribeDao.subscribe(fromMemberID, toMemberID);
     }
 
-
+    @Transactional
     public List<SubscribeDto> getSubscribeList(String currentUserID, String targetUserID) {
         return subscribeDao.getSubscribeList(currentUserID, targetUserID);
+    }
+
+    @Transactional
+    public int getSubscribeState(String fromMemberID,String toMemberID) {
+        return subscribeDao.getSubscribeState(fromMemberID, toMemberID);
     }
 
     @Transactional

@@ -34,4 +34,7 @@ public class SubscribeDao {
     }
 
 
+    public int getSubscribeState(String fromMemberID, String toMemberID) {
+        return subscribeRepository.getSubscribeState(fromMemberID, toMemberID);
+    }
 }

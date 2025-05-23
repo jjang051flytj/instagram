@@ -31,6 +31,7 @@ public class MemberService {
     private final MemberDao memberDao;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final MemberMapper memberMapper; // MapStruct Mapper 주입
+    private final SubscribeService subscribeService; // MapStruct Mapper 주입
 
     @Value("${file.path}")
     String upload;
@@ -73,11 +74,16 @@ public class MemberService {
 
     public InfoDto findByUserID(String loggedMemberID,String userID) {
         Optional<Member> optionalMember = memberDao.findByUserID(userID);
+        int num = subscribeService.getSubscribeState(loggedMemberID,userID); //0(구독),  1(구독중)  //갯수 카운팅해서 크면 구독중 아니면 rnehr
+        if(num>0) {
+
+        }
         if(optionalMember.isPresent()){
             Member member = optionalMember.get();
             return InfoDto.builder()
                     .pageOwner(loggedMemberID.equals(userID)) //hong
                     .storyTotal(member.getStoryList().size())
+                    .subscribeStatus(num>0?true:false)
                     .member(member)
                     .build();
         }

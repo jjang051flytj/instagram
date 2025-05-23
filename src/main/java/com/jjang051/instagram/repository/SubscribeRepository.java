@@ -27,5 +27,14 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
 
     @Modifying
     @Query(value = "DELETE FROM INSTA_SUBSCRIBE  WHERE fromMemberID = :fromMemberID AND toMemberID = :toMemberID", nativeQuery = true)
-    int unSubscribe(String fromMemberID, String toMemberID);
+    int unSubscribe(@Param("fromMemberID") String fromMemberID, @Param("toMemberID") String toMemberID);
+
+
+    @Query(value = "SELECT COUNT(*) FROM INSTA_SUBSCRIBE WHERE fromMemberID = :fromMemberID AND toMemberID = :toMemberID", nativeQuery = true)
+    int getSubscribeState(@Param("fromMemberID") String fromMemberID, @Param("toMemberID") String toMemberID);
+
+    //jpql
+    boolean existsByFromMemberAndToMember(Member fromMember, Member toMember);
+
+
 }
