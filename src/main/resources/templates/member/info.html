@@ -31,12 +31,12 @@
   <div class="container">
     <div class="info-box">
       <div class="profile-img" id="profile-img">
-        <th:block th:if="${myInfo.profileImg != null}">
+        <th:block th:if="${myInfo.member.profileImg != null}">
           <img src="/images/profile.jpg" alt="" id="profile"
-               th:src="@{/upload/{profile}(profile=${myInfo.profileImg})}"
+               th:src="@{/upload/{profile}(profile=${myInfo.member.profileImg})}"
           />
         </th:block>
-        <th:block th:unless="${myInfo.profileImg != null}">
+        <th:block th:unless="${myInfo.member.profileImg != null}">
           <img src="/images/profile.jpg" alt="" id="profile" />
         </th:block>
       </div>
@@ -47,41 +47,57 @@
       <div class="info">
         <div class="upper">
           <h2>jjang051's media lab</h2>
-          <ul>
-            <li><a href="/story/write">스토리등록</a></li>
-            <li><a href="" id="btn-subscribe">구독하기</a></li>
-            <li><a href="">설정하기</a></li>
-            <li>
-              <a th:if="${#authentication != null}" href="/member/logout">로그아웃</a>
-            </li>
-          </ul>
+          <th:block th:if="${myInfo.pageOwner}">
+            <ul>
+              <li><a href="/story/write">스토리등록</a></li>
+              <!--<li><a href="" id="btn-subscribe">구독하기</a></li>-->
+              <li><a href="">설정하기</a></li>
+              <li>
+                <a th:if="${#authentication != null}" href="/member/logout">로그아웃</a>
+              </li>
+            </ul>
+          </th:block>
+          <th:block th:unless="${myInfo.pageOwner}">
+            <ul>
+              <!--<li><a href="/story/write">스토리등록</a></li>-->
+              <li><a href="" id="btn-subscribe">구독하기</a></li>
+              <!--<li><a href="">설정하기</a></li>-->
+              <!--
+              <li>
+                <a th:if="${#authentication != null}" href="/member/logout">로그아웃</a>
+              </li>
+              -->
+            </ul>
+          </th:block>
+
         </div>
         <div class="lower">
           <div class="subscribe">
-            <span>게시물 <em>3</em></span>
+            <span>게시물 <em th:text="${myInfo.storyTotal}">3</em></span>
             <span>구독정보 <em>2</em></span>
           </div>
           <div class="desc">간단한 자기 소개 글이 나옵니다.</div>
         </div>
       </div>
     </div>
+    <!--
     <div class="subscribe-list">
       <ul>
         <th:block th:each="member : ${subscribeList}">
           <li>
             <a th:href="@{/member/info/{userID}(userID=${member.userID})}">
-<!--              <img th:src="@{/upload/{img}(img=${member.profileImg})}" alt="profile">-->
+               <img th:src="@{/upload/{img}(img=${member.profileImg})}" alt="profile">
               <img src="/images/profile.jpg">
               <div th:text="${member.userName}">유저이름</div>
             </a>
           </li>
         </th:block>
       </ul>
-
     </div>
+    -->
     <div class="story-list-box">
       <ul>
-        <th:block th:each="item:${myInfo.storyList}">
+        <th:block th:each="item:${myInfo.member.storyList}">
           <li>
             <a href="" th:href="@{|/story/${item.id}|}">
               <img src="/images/people.jpg" alt="" th:src="@{|/upload/${item.imgUrl}|}" />
@@ -124,28 +140,38 @@
 <footer th:replace="~{fragments/footer}"></footer>
 <script th:inline="javascript">
   //로그인한 사람이
-  const toMemberID = /*[[${myInfo.userID}]]*/ jjang051;
-  const btnSubscribe = document.querySelector("#btn-subscribe");
-  btnSubscribe.addEventListener("click",(e)=>{
-    e.preventDefault();
-    fetch(`/api/subscribe/${toMemberID}`,{
-      method:"post"
-    })
-            .then(response=>response.json())
-            .then(json=>{
-              console.log("구독 성공");
-              if(json.isSubscribe) {
-                alert("구독성공");
-              } else {
-                alert("구독실패");
-              }
-            })
-  })
-
+  const toMemberID = /*[[${myInfo.member.userID}]]*/ jjang051;
+  const loggedMemberID = /*[[${#authentication.principal.loggedMember.userID}]]*/ jjang051;
+  const pageOwner = /*[[${myInfo.pageOwner}]]*/ false;
   const profileImg = document.querySelector("#profile-img");
   const profileFile = document.querySelector("#profile-file");
+  const btnSubscribe = document.querySelector("#btn-subscribe"); //있을 수도 있고 없을 수도 있고
+  console.log("btnSubscribe===",btnSubscribe);
+  if(btnSubscribe) {
+    btnSubscribe.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetch(`/api/subscribe/${toMemberID}`, {
+        method: "post"
+      })
+              .then(response => response.json())
+              .then(json => {
+                console.log("구독 성공");
+                if (json.isSubscribe) {
+                  alert("구독성공");
+                } else {
+                  alert("구독실패");
+                }
+              })
+    })
+  }
+  console.log("===null",profileImg);
+
   profileImg.addEventListener("click",(e)=>{
     console.log("click");
+    if(!pageOwner) {
+      alert("프로필을 수정할 수 없습니다.");
+      return;
+    }
     profileFile.click(); //trigger
 
   });
@@ -162,7 +188,7 @@
       age:20,
     }
     const profile = document.querySelector("#profile");
-    const loggedMemberID = /*[[${#authentication.principal.loggedMember.userID}]]*/ jjang051;
+
     const profileForm =  document.querySelector("#profile-form");
     const sendFormData = new FormData(profileForm); //form에 있는 input들이 name값으로 서버로 전달된다.
 //    sendFormData.append("userID","홍길동");

@@ -2,6 +2,7 @@ package com.jjang051.instagram.service;
 
 import com.jjang051.instagram.constant.Role;
 import com.jjang051.instagram.dao.MemberDao;
+import com.jjang051.instagram.dto.InfoDto;
 import com.jjang051.instagram.dto.MemberDto;
 import com.jjang051.instagram.entity.Member;
 import com.jjang051.instagram.mapper.MemberMapper;
@@ -69,6 +70,20 @@ public class MemberService {
         }
         return null;
     }
+
+    public InfoDto findByUserID(String loggedMemberID,String userID) {
+        Optional<Member> optionalMember = memberDao.findByUserID(userID);
+        if(optionalMember.isPresent()){
+            Member member = optionalMember.get();
+            return InfoDto.builder()
+                    .pageOwner(loggedMemberID.equals(userID)) //hong
+                    .storyTotal(member.getStoryList().size())
+                    .member(member)
+                    .build();
+        }
+        return null;
+    }
+
 
     @Transactional
     public Member chageProfile(String loggedMemberID, MultipartFile profileImg) {
