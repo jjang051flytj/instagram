@@ -31,12 +31,12 @@
   <div class="container">
     <div class="info-box">
       <div class="profile-img" id="profile-img">
-        <th:block th:if="myInfo.profileImg != null">
+        <th:block th:if="${myInfo.profileImg != null}">
           <img src="/images/profile.jpg" alt="" id="profile"
                th:src="@{/upload/{profile}(profile=${myInfo.profileImg})}"
           />
         </th:block>
-        <th:block th:unless="myInfo.profileImg != null">
+        <th:block th:unless="${myInfo.profileImg != null}">
           <img src="/images/profile.jpg" alt="" id="profile" />
         </th:block>
       </div>
@@ -180,3 +180,5 @@
 </script>
 </body>
 </html>
+
+<!--profile을 로그인한 사람이 자기자신과 같을때만 -->
