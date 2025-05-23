@@ -11,10 +11,7 @@ import java.util.List;
 
 public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
 
-    @Modifying
-    @Query(value = "INSERT INTO INSTA_SUBSCRIBE (id,fromMemberID, toMemberID, regDate, modifyDate) values " +
-            "(SUBSCRIBE_SEQ.NEXTVAL, :fromMemberID,:toMemberID, sysdate,sysdate)", nativeQuery = true)
-    int subscribe(@Param("fromMemberID") String fromMemberID,@Param("toMemberID") String toMemberID);
+
 
 
     @Query(value = "SELECT m.* " +
@@ -23,4 +20,12 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
             "WHERE s.frommemberid = :fromUserID", nativeQuery = true)
     List<Member> findSubscribedUsers(@Param("fromUserID") String fromUserID);
 
+    @Modifying
+    @Query(value = "INSERT INTO INSTA_SUBSCRIBE (id,fromMemberID, toMemberID, regDate, modifyDate) values " +
+            "(SUBSCRIBE_SEQ.NEXTVAL, :fromMemberID,:toMemberID, sysdate,sysdate)", nativeQuery = true)
+    int subscribe(@Param("fromMemberID") String fromMemberID,@Param("toMemberID") String toMemberID);
+
+    @Modifying
+    @Query(value = "DELETE FROM INSTA_SUBSCRIBE  WHERE fromMemberID = :fromMemberID AND toMemberID = :toMemberID", nativeQuery = true)
+    int unSubscribe(String fromMemberID, String toMemberID);
 }

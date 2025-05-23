@@ -18,6 +18,9 @@ public class SubscribeDao {
         return subscribeRepository.subscribe(fromMemberID, toMemberID);
     }
 
+    public int unSubscribe(String fromMemberID, String toMemberID) {
+        return subscribeRepository.unSubscribe(fromMemberID, toMemberID);
+    }
     public List<SubscribeDto> getSubscribeList(String currentUserID, String targetUserID) {
         List<Member> subscribedMembers = subscribeRepository.findSubscribedUsers(targetUserID);
 
@@ -29,4 +32,6 @@ public class SubscribeDao {
                 .build()
         ).toList();
     }
+
+
 }

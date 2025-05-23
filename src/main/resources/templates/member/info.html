@@ -46,7 +46,7 @@
       </form>
       <div class="info">
         <div class="upper">
-          <h2>jjang051's media lab</h2>
+          <h2 th:text="${myInfo.member.userName}">jjang051's media lab</h2>
           <th:block th:if="${myInfo.pageOwner}">
             <ul>
               <li><a href="/story/write">스토리등록</a></li>
@@ -60,7 +60,7 @@
           <th:block th:unless="${myInfo.pageOwner}">
             <ul>
               <!--<li><a href="/story/write">스토리등록</a></li>-->
-              <li><a href="" id="btn-subscribe">구독하기</a></li>
+              <li><a href="" id="btn-subscribe" data-subscribe="yes">구독하기</a></li>
               <!--<li><a href="">설정하기</a></li>-->
               <!--
               <li>
@@ -150,20 +150,41 @@
   if(btnSubscribe) {
     btnSubscribe.addEventListener("click", (e) => {
       e.preventDefault();
-      fetch(`/api/subscribe/${toMemberID}`, {
-        method: "post"
-      })
-              .then(response => response.json())
-              .then(json => {
-                console.log("구독 성공");
-                if (json.isSubscribe) {
-                  alert("구독성공");
-                } else {
-                  alert("구독실패");
-                }
-              })
+      const subscribeStatus = btnSubscribe.dataset.subscribe;
+
+      console.log("subscribeStatus ===",subscribeStatus);
+      if (subscribeStatus === "yes") {
+        fetch(`/api/subscribe/${toMemberID}`, {
+          method: "post"
+        })
+        .then(response => response.json())
+        .then(json => {
+          if (json.isSubscribe) {
+            alert("구독성공");
+            btnSubscribe.dataset.subscribe = "no";
+            btnSubscribe.textContent="구독취소";
+          } else {
+            alert("오류");
+          }
+        })
+      } else {
+        fetch(`/api/subscribe/${toMemberID}`, {
+          method: "delete"
+        })
+        .then(response => response.json())
+        .then(json => {
+          if (json.isSubscribeDelete) {
+            alert("구독취소");
+            btnSubscribe.dataset.subscribe = "yes";
+            btnSubscribe.textContent="구독하기";
+          } else {
+            alert("오류02");
+          }
+        })
+      }
     })
   }
+  //구독 하기 구독 취소  ajax (db에 반영)
   console.log("===null",profileImg);
 
   profileImg.addEventListener("click",(e)=>{

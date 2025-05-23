@@ -22,4 +22,9 @@ public class SubscribeService {
     public List<SubscribeDto> getSubscribeList(String currentUserID, String targetUserID) {
         return subscribeDao.getSubscribeList(currentUserID, targetUserID);
     }
+
+    @Transactional
+    public int unSubscribe(String fromMemberID, String toMemberID) {
+        return subscribeDao.unSubscribe(fromMemberID, toMemberID);
+    }
 }
