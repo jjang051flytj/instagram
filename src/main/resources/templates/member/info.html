@@ -31,7 +31,14 @@
   <div class="container">
     <div class="info-box">
       <div class="profile-img" id="profile-img">
-        <img src="/images/profile.jpg" alt="" id="profile" />
+        <th:block th:if="myInfo.profileImg != null">
+          <img src="/images/profile.jpg" alt="" id="profile"
+               th:src="@{/upload/{profile}(profile=${myInfo.profileImg})}"
+          />
+        </th:block>
+        <th:block th:unless="myInfo.profileImg != null">
+          <img src="/images/profile.jpg" alt="" id="profile" />
+        </th:block>
       </div>
       <form style="display:none" id="profile-form">
         <input type="file" name="profileImg" id="profile-file">
@@ -160,16 +167,15 @@
     const sendFormData = new FormData(profileForm); //form에 있는 input들이 name값으로 서버로 전달된다.
 //    sendFormData.append("userID","홍길동");
 //    sendFormData.append("profileImg","이미지입니다.");
-    sendFormData.append("userID","홍길동"); //
-
+//    sendFormData.append("userID","홍길동"); //
     fetch(`/api/member/${loggedMemberID}/profile`,{
       method:"post",
       body:sendFormData
     })
-            .then(response=>response.json())
-            .then(json=>{
-              profile.setAttribute("src","/images/logo.png");
-            })
+    .then(response=>response.json())
+    .then(json=>{
+      profile.src = "/upload/"+json.profileImgPath;
+    })
   })
 </script>
 </body>

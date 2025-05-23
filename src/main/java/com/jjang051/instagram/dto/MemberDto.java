@@ -36,7 +36,7 @@ public class MemberDto {
     @Enumerated(EnumType.STRING)
     private Role role; //Role 상수 처리할 예정 enum
 
-    private MultipartFile profileImg;
+    private String profileImg;
 
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;

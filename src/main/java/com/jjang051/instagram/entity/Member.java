@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-@Table(name="instgram_member")
+@Table(name="instagram_member")
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,6 +28,8 @@ public class Member extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String userEmail;
+
+    private String profileImg;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -54,6 +56,8 @@ public class Member extends BaseEntity {
     //@JsonManagedReference
     private List<Like> likes;
 
-
-
+    public Member updateProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+        return this;
+    }
 }
