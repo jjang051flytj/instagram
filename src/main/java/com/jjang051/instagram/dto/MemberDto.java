@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -34,6 +35,8 @@ public class MemberDto {
 
     @Enumerated(EnumType.STRING)
     private Role role; //Role 상수 처리할 예정 enum
+
+    private MultipartFile profileImg;
 
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
